@@ -29,3 +29,15 @@ func (mi *GdInterface) ToInterfaces() []interface{} {
 	}
 	return r
 }
+
+type GdInterfaces struct {
+	Value []interface{}
+}
+
+func (gis *GdInterfaces) ToStrings() []string {
+	var r []string
+	for _, v := range gis.Value {
+    r = append(r, v.(string))
+	}
+	return r
+}
