@@ -7,11 +7,11 @@ import (
 func getGdListIns() (GdList, GdList) {
 	var ssgl, iigl GdList
 
-	ssmi := GdInterface{[]string{"1", "2", "3", "4", "5"}}
-	ssgl.Value = ssmi.ToInterfaces()
+	ssgi := GdInterface{[]string{"1", "2", "3", "4", "5"}}
+	ssgl.Value = ssgi.ToInterfaces()
 
-	iimi := GdInterface{[]int{1, 2, 3, 4, 5}}
-	iigl.Value = iimi.ToInterfaces()
+	iigi := GdInterface{[]int{1, 2, 3, 4, 5}}
+	iigl.Value = iigi.ToInterfaces()
 
 	return ssgl, iigl
 }
@@ -79,6 +79,23 @@ func Test_At(t *testing.T) {
 	t.Log(FuncName + " ... ok!")
 }
 
+func Test_Getter(t *testing.T) {
+	FuncName := "GdLists.Getter()"
+
+	ssgl, _ := getGdListIns()
+	Pssgl := &ssgl
+	Pssgl.New()
+
+	r := Pssgl.Getter(2)
+	// pln(r)
+
+	if r != "3" {
+		t.Error(FuncName + " ... failed!")
+	}
+
+	t.Log(FuncName + " ... ok!")
+}
+
 func Test_Setter(t *testing.T) {
 	FuncName := "GdLists.Setter()"
 
@@ -92,7 +109,7 @@ func Test_Setter(t *testing.T) {
 
 	// dd(Pssgl.Value[2])
 
-	if Pssgl.Value[2] != "100" {
+	if Pssgl.Getter(2) != "100" {
 		t.Error(FuncName + " ... failed!")
 	}
 
@@ -110,7 +127,7 @@ func Test_Remove(t *testing.T) {
 
 	// dd(Pssgl.Value)
 
-	if Pssgl.Len() != 4 || Pssgl.Value[2] != "4" {
+	if Pssgl.Len() != 4 || Pssgl.Getter(2) != "4" {
 		t.Error(FuncName + " ... failed!")
 	}
 
@@ -476,6 +493,74 @@ func Test_Insert(t *testing.T) {
 	// Pssgl.Insert(2, b)
 
 	// dd(Pssgl.Value)
+
+	t.Log(FuncName + " ... ok!")
+}
+
+func Test_Pop(t *testing.T) {
+	FuncName := "GdLists.Pop()"
+
+	ssgl, _ := getGdListIns()
+	Pssgl := &ssgl
+	Pssgl.New()
+
+	// o, gl := Pssgl.Pop()
+	// dd(o)
+	// dd(gl.Sync().Value)
+
+	// o, gl = Pssgl.Pop()
+	// dd(o)
+	// dd(gl.Sync().Value)
+
+	t.Log(FuncName + " ... ok!")
+}
+
+func Test_Push(t *testing.T) {
+	FuncName := "GdLists.Pop()"
+
+	ssgl, _ := getGdListIns()
+	Pssgl := &ssgl
+	Pssgl.New()
+
+	var i interface{} = "100"
+	Pssgl.Push(i)
+	Pssgl.Push(i)
+
+	// dd(Pssgl.Sync().Value)
+
+	t.Log(FuncName + " ... ok!")
+}
+
+func Test_Shift(t *testing.T) {
+	FuncName := "GdLists.Shift()"
+
+	ssgl, _ := getGdListIns()
+	Pssgl := &ssgl
+	Pssgl.New()
+
+	// o, gl := Pssgl.Shift()
+	// dd(o)
+	// dd(gl.Sync().Value)
+
+	// o, gl = Pssgl.Shift()
+	// dd(o)
+	// dd(gl.Sync().Value)
+
+	t.Log(FuncName + " ... ok!")
+}
+
+func Test_Unshift(t *testing.T) {
+	FuncName := "GdLists.Unshift()"
+
+	ssgl, _ := getGdListIns()
+	Pssgl := &ssgl
+	Pssgl.New()
+
+	var i interface{} = "100"
+	Pssgl.Unshift(i)
+	Pssgl.Unshift(i)
+
+	// dd(Pssgl.Sync().Value)
 
 	t.Log(FuncName + " ... ok!")
 }

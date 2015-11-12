@@ -33,6 +33,8 @@ func (gl *GdList) Sync() *GdList {
 	return gl
 }
 
+// TODO isSynced()
+
 func (gl *GdList) Len() int {
 	l := gl.list
 	return l.Len()
@@ -67,11 +69,11 @@ func (gl *GdList) At(i int) *list.Element {
 }
 
 func (gl *GdList) Getter(i int) interface{} {
-	return gl.Value[i]
+	return gl.At(i).Value
 }
 
 func (gl *GdList) Setter(i int, v interface{}) *GdList {
-	gl.Value[i] = v
+	gl.At(i).Value = v
 	return gl
 }
 
@@ -142,7 +144,7 @@ func (gl *GdList) Slice(s int, e int) *GdList {
 
 func (gl *GdList) Chunk(ii ...int) []GdList {
 	lii := len(ii)
-  l := gl.Len()
+	l := gl.Len()
 
 	var gls []GdList
 
@@ -329,29 +331,38 @@ func (gl *GdList) Insert(i int, ii interface{}) *GdList {
 	return gl
 }
 
-// get last
-func (gl *GdList) Pop() interface{} {
+// Pop -- remove one at the back of list
+func (gl *GdList) Pop() (interface{}, *GdList) {
 	l := gl.Len()
-	p := gl.Getter(l-1)
-	gl.Remove(l-1)
-	return p
+	if l <= 1 {
+		return nil, nil
+	}
+	p := gl.Getter(l - 1)
+	gl.Remove(l - 1)
+	// gl.Sync()
+	return p, gl
 }
 
-// add last
+// Push -- add one at the back of list
 func (gl *GdList) Push(i interface{}) *GdList {
 	l := gl.list
 	l.PushBack(i)
 	return gl
 }
 
-// get first
-func (gl *GdList) Shift() interface{} {
+// Shift -- remove one at the front of list
+func (gl *GdList) Shift() (interface{}, *GdList) {
+	l := gl.Len()
+	if l <= 1 {
+		return nil, nil
+	}
 	p := gl.Getter(0)
 	gl.Remove(0)
-	return p
+	// gl.Sync()
+	return p, gl
 }
 
-// add first
+// Unshift -- add one at the front of list
 func (gl *GdList) Unshift(i interface{}) *GdList {
 	l := gl.list
 	l.PushFront(i)
@@ -362,6 +373,7 @@ func (gl *GdList) Unshift(i interface{}) *GdList {
 // (IndexOf)
 // (Flatten)
 // (Sort)
+// (Compact) -- Maybe can add param type as "string"/"int"/"interface{}"
 
 ////////////////////////////////////////////////////
 ////////////////////////////////////////////////////

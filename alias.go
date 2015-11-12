@@ -5,8 +5,8 @@ import (
 )
 
 var (
-	Pln    = fmt.Println
-	Prf    = fmt.Printf
+	Pln = fmt.Println
+	Prf = fmt.Printf
 )
 
 var (
