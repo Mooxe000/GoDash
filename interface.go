@@ -37,7 +37,7 @@ type GdInterfaces struct {
 func (gis *GdInterfaces) ToStrings() []string {
 	var r []string
 	for _, v := range gis.Value {
-    r = append(r, v.(string))
+		r = append(r, v.(string))
 	}
 	return r
 }
