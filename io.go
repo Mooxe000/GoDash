@@ -23,8 +23,8 @@ func ReaderFromFilePath(filePath string) io.Reader {
 func bufferFromFilePath(filePath string) []byte {
 	reader := ReaderFromFilePath(filePath)
 
-  var file = *(reader.(*os.File))
-  defer file.Close()
+	var file = *(reader.(*os.File))
+	defer file.Close()
 
 	buffer, _ := ioutil.ReadAll(reader)
 	return buffer
