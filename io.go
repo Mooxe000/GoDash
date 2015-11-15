@@ -35,3 +35,26 @@ func StrFromFilePath(filePath string) string {
 
 	return string(buffer)
 }
+
+func check(e error) {
+    if e != nil {
+        panic(e)
+    }
+}
+
+func BytesToString(bs []byte) string {
+  return string(bs[:])
+}
+func StringToBytes(s string) []byte {
+  return []byte(s)
+}
+
+func BytesToFilePath(filePath string, bs []byte) {
+  err := ioutil.WriteFile(filePath, bs, 0644)
+  check(err)
+}
+
+func StringToFilePath(filePath string, s string) {
+  bs := StringToBytes(s)
+  BytesToFilePath(filePath, bs)
+}
